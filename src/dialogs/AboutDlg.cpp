@@ -26,8 +26,8 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	setupUi(this);
 	createBanner(&BannerPixmap,getPixmap("keepassx"),QString("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
 
-    labelAppName->setText(APP_DISPLAY_NAME);
-    labelAppFunc->setText(QString(" -  ").append(APP_LONG_FUNC));
+	labelAppName->setText(APP_DISPLAY_NAME);
+	labelAppFunc->setText(QString(" -  ").append(APP_LONG_FUNC));
 
 	QString AboutTr=QString("<b>%1: %2</b><br><br>").arg(tr("Current Translation")).arg(tr("None","Please replace 'None' with the language of your translation"));
 	if(isTranslationActive()){
@@ -53,13 +53,14 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	str+="<br>";
 	str+="<u>Juan J Gonz&aacute;lez C&aacute;rdenas [Jota Jota]</u><br>"+tr("Developer")+"<br>myxelf@users.sf.net<br>";
 	str+="</div><br><div style='margin-left:0px;'>";
-    str+="<b>"+tr("Thanks To")+"</b><br>";
+	str+="<b>"+tr("Thanks To")+"</b><br>";
 	str+="</div><div style='margin-left:10px;'>";
-	str+="<u>Matthias Miller</u><br>"+tr("Patches for better MacOS X support")+"<br>www.outofhanwell.com<br></div>";
+	str+="<u>Matthias Miller</u><br>"+tr("Patches for better MacOS X support")+"<br>www.outofhanwell.com<br>";
 	str+="<br>";
-	str+="<u>James Nicholls</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
+	str+="<u>James Nicholls</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br>";
 	str+="<br>";
-	str+="<u>Constantin Makshin</u><br>"+tr("Various fixes and improvements")+"<br>dinosaur-rus@users.sourceforge.net<br></div>";
+	str+="<u>Constantin Makshin</u><br>"+tr("Various fixes and improvements")+"<br>dinosaur-rus@users.sourceforge.net<br>";
+	str+="</div>";
 	Edit_Thanks->setHtml(str);
 	
 	QFile gpl(DataDir+"/license.html");
@@ -79,4 +80,9 @@ void AboutDialog::paintEvent(QPaintEvent *event){
 	QPainter painter(this);
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
+}
+
+void AboutDialog::resizeEvent(QResizeEvent* event){
+	createBanner(&BannerPixmap, getPixmap("keepassx"), QString("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION), width());
+	QDialog::resizeEvent(event);
 }

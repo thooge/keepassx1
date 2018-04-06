@@ -32,6 +32,7 @@ class AboutDialog : public QDialog, private Ui_AboutDlg
 	private:
 		QPixmap BannerPixmap;
 		virtual void paintEvent(QPaintEvent*);
+		virtual void resizeEvent(QResizeEvent*);
 };
 
 #endif
