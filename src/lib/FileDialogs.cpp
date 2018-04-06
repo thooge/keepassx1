@@ -120,6 +120,10 @@ QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QStr
 	                                                ShowOverwriteWarning ? (QFileDialog::Option)0 : QFileDialog::DontConfirmOverwrite);
 	LastFilter=Filters.indexOf(SelectedFilter);
 		
+	//Dont't add an extension to the result if no file has been selected
+	if (filepath.isEmpty())
+		return filepath;
+	
 	//Check whether the file has an extension which fits to the selected filter
 	QFileInfo file(filepath);
 	QString filename=file.fileName();

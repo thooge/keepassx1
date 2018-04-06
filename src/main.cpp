@@ -24,6 +24,9 @@
 #if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
 	#include "Application_X11.h"
 #endif
+#ifdef Q_WS_WIN
+	#include <Windows.h>
+#endif
 
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
@@ -49,6 +52,12 @@ IIconTheme* IconLoader=NULL;
 
 int main(int argc, char **argv)
 {
+#ifdef Q_WS_WIN
+	// Make sure Windows doesn't load DLLs from the current working directory
+	SetDllDirectoryA("");
+	SetSearchPathMode(BASE_SEARCH_PATH_ENABLE_SAFE_SEARCHMODE);
+#endif
+
 	setlocale(LC_CTYPE, "");
 	
 #if defined(Q_WS_X11) && defined(AUTOTYPE)

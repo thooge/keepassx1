@@ -1,3 +1,12 @@
+----------------------------                                                                                                                                                                                                                           
+    0.4.4 (2015-12-08)
+----------------------------
+
+- Add hardening measures to prevent loading DLLs from the current working directory on Windows. (CVE-2015-8359)
+- Fix CVE-2015-8378: Canceling XML export operation creates export as ".xml"
+- Auto-type and global auto-type functionality for OS X
+- Enable retina display on OS X
+
 ----------------------------
     0.4.3 (2010-03-07)
 ----------------------------
