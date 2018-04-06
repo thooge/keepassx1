@@ -338,7 +338,7 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 	IEntryHandle* handle = item->EntryHandle;
 	CEntry old = handle->data();
 	
-	CEditEntryDlg dlg(db,handle,this,true);
+	CEditEntryDlg dlg(db,handle,this,false);
 	int result = dlg.exec();
 	switch(result){
 		case 0: //canceled or no changes
