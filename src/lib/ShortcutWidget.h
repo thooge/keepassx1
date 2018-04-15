@@ -20,7 +20,7 @@
 #define SHORTCUT_WIDGET_H
 
 
-#if defined(GLOBAL_AUTOTYPE) && (defined(Q_WS_X11) || defined(Q_WS_MAC))
+#if defined(GLOBAL_AUTOTYPE) && (defined(Q_OS_LINUX) || defined(Q_OS_MAC))
 #include "lib/AutoType.h"
 #endif
 
@@ -29,7 +29,7 @@ class ShortcutWidget : public QLineEdit{
 	
 	public:
 		ShortcutWidget(QWidget* parent = 0);
-#if defined(GLOBAL_AUTOTYPE) && (defined(Q_WS_X11) || defined(Q_WS_MAC))
+#if defined(GLOBAL_AUTOTYPE) && (defined(Q_OS_LINUX) || defined(Q_OS_MAC))
 		Shortcut shortcut();
 		void setShortcut(const Shortcut& s);
 	

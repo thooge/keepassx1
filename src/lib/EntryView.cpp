@@ -18,6 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QWidget>
+#include <QMimeData>
+#include <QDrag>
 #include <QHeaderView>
 #include <QClipboard>
 #include <QProcess>
@@ -35,9 +38,9 @@ KeepassEntryView* pEntryView;*/
 KeepassEntryView::KeepassEntryView(QWidget* parent) : QTreeWidget(parent) {
 	ViewMode=Normal;
 	AutoResizeColumns = true;
-	header()->setResizeMode(QHeaderView::Interactive);
+	header()->setSectionResizeMode(QHeaderView::Interactive);
 	header()->setStretchLastSection(false);
-	header()->setClickable(true);
+	header()->setSectionsClickable(true);
 	header()->setCascadingSectionResizes(true);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	retranslateColumns();
@@ -338,7 +341,7 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 	IEntryHandle* handle = item->EntryHandle;
 	CEntry old = handle->data();
 	
-	CEditEntryDlg dlg(db,handle,this,false);
+	CEditEntryDlg dlg(db,handle,this,true);
 	int result = dlg.exec();
 	switch(result){
 		case 0: //canceled or no changes
@@ -483,7 +486,7 @@ void KeepassEntryView::OnClipboardTimeOut(){
 	if(Clipboard->supportsSelection()){
 		Clipboard->clear(QClipboard::Selection);
 	}
-#ifdef Q_WS_X11
+#ifdef Q_OS_LINUX
 	QProcess::startDetached("dcop klipper klipper clearClipboardHistory");
 	QProcess::startDetached("dbus-send --type=method_call --dest=org.kde.klipper /klipper "
 		"org.kde.klipper.klipper.clearClipboardHistory");

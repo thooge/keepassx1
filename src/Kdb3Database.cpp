@@ -883,7 +883,7 @@ void Kdb3Database::GroupHandle::setIndex(int index){
 */
 
 bool Kdb3Database::convHexToBinaryKey(char* HexKey, char* dst){
-	QString hex=QString::fromAscii(HexKey,64);
+	QString hex=QString::fromLatin1(HexKey,64);
 	for(int i=0; i<64; i+=2){
 		bool err;
 		quint8 bin;

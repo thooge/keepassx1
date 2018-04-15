@@ -28,7 +28,7 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 {
 	Q_OBJECT
 	public:
-		CGenPwDialog(QWidget* parent, bool StandAloneMode, Qt::WFlags fl = 0);
+		CGenPwDialog(QWidget* parent, bool StandAloneMode, Qt::WindowFlags fl = 0);
 		~CGenPwDialog();
 	
 	private:

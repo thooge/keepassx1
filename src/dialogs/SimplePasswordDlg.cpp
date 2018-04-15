@@ -21,7 +21,7 @@
 
 #include "SimplePasswordDlg.h"
 
-SimplePasswordDialog::SimplePasswordDialog(QWidget* parent, Qt::WFlags fl)
+SimplePasswordDialog::SimplePasswordDialog(QWidget* parent, Qt::WindowFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);

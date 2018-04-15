@@ -25,11 +25,11 @@
 
 #include "lib/AutoType.h"
 
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
 #	define DEFAULT_MOUNT_DIR "/Volumes/"
-#elif defined(Q_WS_X11)
+#elif defined(Q_OS_LINUX)
 #	define DEFAULT_MOUNT_DIR "/media/"
-#elif defined(Q_WS_WIN)
+#elif defined(Q_OS_WIN32)
 #	define DEFAULT_MOUNT_DIR "/"
 #else
 #	define DEFAULT_MOUNT_DIR QString()

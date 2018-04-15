@@ -124,7 +124,7 @@ bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandl
 		else if(ChildNodes.item(i).toElement().tagName()=="bindesc")
 			entry->setBinaryDesc(ChildNodes.item(i).toElement().text());
 		else if(ChildNodes.item(i).toElement().tagName()=="bin")
-			entry->setBinary(QByteArray::fromBase64(ChildNodes.item(i).toElement().text().toAscii()));
+			entry->setBinary(QByteArray::fromBase64(ChildNodes.item(i).toElement().text().toLatin1()));
 		else if(ChildNodes.item(i).toElement().tagName()=="comment"){
 			QDomNodeList Lines=ChildNodes.item(i).childNodes();
 			QString comment;

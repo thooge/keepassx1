@@ -21,7 +21,7 @@
 
 #include "UrlLabel.h"
 
-LinkLabel::LinkLabel(QWidget *parent,const QString& text, int x, int y,Qt::WFlags f) : QLabel(parent,f){
+LinkLabel::LinkLabel(QWidget *parent,const QString& text, int x, int y,Qt::WindowFlags f) : QLabel(parent,f){
 	QFont font(parentWidget()->font());
 	font.setUnderline(true);
 	setFont(font);

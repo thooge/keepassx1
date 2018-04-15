@@ -44,7 +44,7 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	file->read(buffer,len);
 	file->close();
 	delete file;
-	if(QString::fromAscii(buffer,17)!="PWM_PASSWORD_FILE")
+	if(QString::fromLatin1(buffer,17)!="PWM_PASSWORD_FILE")
 	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is no valid PwManager file.")); return false;}
 	offset+=17;
 	if(buffer[offset]!=0x05)
@@ -81,7 +81,7 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	byte* Key=new byte[pwlen];
 	byte* xml=new byte[len-offset+1];
 	xml[len-offset]=0;
-	memcpy(Key,password.toAscii(),pwlen);
+	memcpy(Key,password.toLatin1(),pwlen);
 	QCryptographicHash sha(QCryptographicHash::Sha1);
 	sha.addData((const char*)Key,pwlen);
 	QByteArray key_hash = sha.result();

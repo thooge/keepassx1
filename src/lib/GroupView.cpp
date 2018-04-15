@@ -22,6 +22,8 @@
 #include "GroupView.h"
 #include "dialogs/EditGroupDlg.h"
 
+#include <QDrag>
+#include <QMimeData>
 #include <QBrush>
 #include <QHeaderView>
 

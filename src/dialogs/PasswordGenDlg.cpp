@@ -28,7 +28,7 @@
 
 bool CGenPwDialog::EntropyCollected=false;
 
-CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
+CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WindowFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);

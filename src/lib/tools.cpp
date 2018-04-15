@@ -22,10 +22,10 @@
 #include <QProcess>
 #include <QTranslator>
 
-#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
 	#include <sys/mman.h>
 	#include <unistd.h>
-#elif defined(Q_WS_WIN)
+#elif defined(Q_OS_WIN32)
 	#include <QLibrary>
 	#include <windows.h>
 	#include <io.h>
@@ -48,7 +48,10 @@ void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,i
 	QPixmap Icon(32,32);
 	if(IconAlpha){
 		Icon.fill(TextColor);
-		Icon.setAlphaChannel(*IconAlpha);
+// TODO Hier Fix!
+//		Icon.setAlphaChannel(*IconAlpha);
+//		QPainter::setCompositionMode(QPainter::CompositionMode_SourceOver)
+		painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
 		painter.drawPixmap(10,10,Icon);
 	}
 	
@@ -220,9 +223,9 @@ bool createKeyFile(const QString& filename,QString* error,int length, bool Hex){
 }
 
 bool lockPage(void* addr, int len){
-#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
 	return (mlock(addr, len)==0);
-#elif defined(Q_WS_WIN)
+#elif defined(Q_OS_WIN32)
 	return VirtualLock(addr, len);
 #else
 	return false;
@@ -230,9 +233,9 @@ bool lockPage(void* addr, int len){
 }
 
 bool unlockPage(void* addr, int len){
-#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
 	return (munlock(addr, len)==0);
-#elif defined(Q_WS_WIN)
+#elif defined(Q_OS_WIN)
 	return VirtualUnlock(addr, len);
 #else
 	return false;
@@ -242,9 +245,9 @@ bool unlockPage(void* addr, int len){
 bool syncFile(QFile* file) {
 	if (!file->flush())
 		return false;
-#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
 	return (fsync(file->handle())==0);
-#elif defined(Q_WS_WIN)
+#elif defined(Q_OS_WIN32)
 	return (_commit(file->handle())==0);
 #else
 	return false;

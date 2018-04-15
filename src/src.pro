@@ -2,6 +2,8 @@
 CONFIG = qt uic resources thread stl warn_on
 QT += xml
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 *-g++ : QMAKE_CXXFLAGS_WARN_ON += -Wno-sign-compare
 
 DEPENDPATH += crypto dialogs export forms import lib translations res

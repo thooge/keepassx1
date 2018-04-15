@@ -19,7 +19,7 @@
 
 #include "ShortcutWidget.h"
 
-#if defined(GLOBAL_AUTOTYPE) && (defined(Q_WS_X11) || defined(Q_WS_MAC))
+#if defined(GLOBAL_AUTOTYPE) && (defined(Q_OS_LINUX) || defined(Q_OS_MAC))
 
 #include <QKeyEvent>
 #include <QPalette>
@@ -62,7 +62,7 @@ void ShortcutWidget::keyEvent(QKeyEvent* event, bool release){
 	if (release && lock)
 		return;
 
-#ifdef Q_WS_X11
+#ifdef Q_OS_LINUX
 	AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
 	
 	unsigned int mods = HelperX11::keyboardModifiers(QX11Info::display());
@@ -70,7 +70,7 @@ void ShortcutWidget::keyEvent(QKeyEvent* event, bool release){
 			mods & ShiftMask, mods & autoTypeGlobal->maskAlt(),
 			mods & autoTypeGlobal->maskAltGr(), mods & autoTypeGlobal->maskMeta());
 #endif
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 	AutoTypeGlobalMacX* autoTypeGlobal = static_cast<AutoTypeGlobalMacX*>(autoType);
 	quint32 mods = event->nativeModifiers();
 	// mods >> 16 bits denote outside main keyboard eg keypad, arrow keys, home, end, etc
@@ -90,7 +90,7 @@ void ShortcutWidget::keyEvent(QKeyEvent* event, bool release){
 void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool shift, bool alt, bool altgr, bool win){
 	QString text;
 	
-#ifdef Q_WS_X11
+#ifdef Q_OS_LINUX
 	if (ctrl)
 		text.append(tr("Ctrl")).append(" + ");
 	if (shift)
@@ -112,7 +112,7 @@ void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool 
 			text.append(static_cast<quint32>(keysym));
 		}
 #endif
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 	if (ctrl)
 		text.append(kControlUnicode);
 	if (shift)

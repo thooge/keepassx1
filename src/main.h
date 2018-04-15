@@ -53,7 +53,7 @@ private:
 class EventListener : public QObject {
 	Q_OBJECT
 	
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 	public:
 		EventListener() { pMainWindow = NULL; };
 		inline QString file() { return pFile; };
