@@ -71,6 +71,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	ExpirePresetsMenu->addAction(tr("6 Months"))->setData(180);
 	ExpirePresetsMenu->addSeparator();
 	ExpirePresetsMenu->addAction(tr("1 Year"))->setData(365);
+	ExpirePresetsMenu->addAction(tr("2 Years"))->setData(730);
 	ButtonExpirePresets->setMenu(ExpirePresetsMenu);
 	QAction* actionCalendar = new QAction(tr("Calendar..."),ButtonExpirePresets);
 	actionCalendar->setData(-1);
